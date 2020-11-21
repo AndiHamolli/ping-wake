@@ -22,13 +22,19 @@ https.get(link, (resp) => {
 
 function get_req(link)
 {
-request({url: link, headers:{
-    'User-Agent': 'Node Browser',
-    'Connection': 'keep-alive',
-} }, (err, res, body) => {
-  if (err) { return console.log(err); }
-  console.log(body);
-});
+
+    return new Promise ((resolve, reject) => {
+        request(
+            {url: link, 
+            headers:{
+                'User-Agent': 'Node Browser',
+                'Connection': 'keep-alive',
+            } 
+            }, (err, res, body) => {
+                if (err) { reject(err); }
+                resolve(body);
+            }
+        )});
 }
 
 
